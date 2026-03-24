@@ -3,44 +3,67 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <title>Instagram Focus</title>
 
   <script>
-  function isStandalone() {
-    return window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true;
-  }
+    function openInstagram() {
+      // Try app first
+      window.location.href = "instagram://";
 
-  if (isStandalone()) {
-    // Only auto-redirect when launched from home screen
-    window.location.href = "instagram://";
+      // Fallback to Following feed
+      setTimeout(() => {
+        window.location.href = "https://www.instagram.com/?variant=following";
+      }, 500);
+    }
 
-    setTimeout(() => {
-      window.location.replace("https://www.instagram.com/?variant=following");
-    }, 300);
-  }
-</script>
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    }
+
+    // Only auto-open AFTER install (safe)
+    window.onload = () => {
+      if (isStandalone()) {
+        openInstagram();
+      }
+    };
+  </script>
 
   <style>
     body {
       margin: 0;
       background: black;
       color: white;
+      font-family: -apple-system;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      font-family: -apple-system;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      background: #fff;
+      color: #000;
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
-  <div style="text-align:center; padding:20px; font-family:-apple-system;">
+  <div>
     <h2>Instagram Focus</h2>
+
     <p>Add this to your Home Screen 👇</p>
-    <p><b>Tap Share → "Add to Home Screen"</b></p>
+    <p><b>Share → "Add to Home Screen"</b></p>
+
+    <button onclick="openInstagram()">
+      Open Instagram
+    </button>
   </div>
 </body>
 </html>
