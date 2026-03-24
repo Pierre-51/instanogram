@@ -6,15 +6,20 @@
   <title>Instagram Focus</title>
 
   <script>
-  function isStandalone() {
-    return window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true;
-  }
-
-  if (isStandalone()) {
-    window.location.replace("https://www.instagram.com/?variant=following");
-  }
-</script>
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    }
+  
+    if (isStandalone()) {
+      // Only auto-redirect when launched from home screen
+      window.location.href = "instagram://";
+  
+      setTimeout(() => {
+        window.location.replace("https://www.instagram.com/?variant=following");
+      }, 300);
+    }
+  </script>
 
   <style>
     body {
