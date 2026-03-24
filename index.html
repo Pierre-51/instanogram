@@ -6,28 +6,15 @@
   <title>Instagram Focus</title>
 
   <script>
-    function openInstagram() {
-      // Try app first
-      window.location.href = "instagram://";
+  function isStandalone() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true;
+  }
 
-      // Fallback to Following feed
-      setTimeout(() => {
-        window.location.href = "https://www.instagram.com/?variant=following";
-      }, 500);
-    }
-
-    function isStandalone() {
-      return window.matchMedia('(display-mode: standalone)').matches
-        || window.navigator.standalone === true;
-    }
-
-    // Only auto-open AFTER install (safe)
-    window.onload = () => {
-      if (isStandalone()) {
-        openInstagram();
-      }
-    };
-  </script>
+  if (isStandalone()) {
+    window.location.replace("https://www.instagram.com/?variant=following");
+  }
+</script>
 
   <style>
     body {
