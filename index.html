@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Instagram Focus</title>
+
+  <script>
+    // Try to open Instagram app (best UX)
+    window.location.href = "instagram://";
+
+    // Fallback to web "Following" feed
+    setTimeout(() => {
+      window.location.replace("https://www.instagram.com/?variant=following");
+    }, 800);
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: -apple-system;
+    }
+  </style>
+</head>
+
+<body>
+  Opening Instagram...
+</body>
+</html>
