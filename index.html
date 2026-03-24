@@ -7,26 +7,20 @@
   <title>Instagram Focus</title>
 
   <script>
-    const isStandalone = window.navigator.standalone;
-  
-    if (isStandalone) {
-      // Open fast when launched from home screen
-      window.location.href = "instagram://";
-  
-      setTimeout(() => {
-        window.location.replace("https://www.instagram.com/?variant=following");
-      }, 300);
-    } else {
-      // Delay when in Safari so you can install it
-      setTimeout(() => {
-        window.location.href = "instagram://";
-  
-        setTimeout(() => {
-          window.location.replace("https://www.instagram.com/?variant=following");
-        }, 800);
-      }, 5000); // 5 seconds to let you tap "Add to Home Screen"
-    }
-  </script>
+  function isStandalone() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true;
+  }
+
+  if (isStandalone()) {
+    // Only auto-redirect when launched from home screen
+    window.location.href = "instagram://";
+
+    setTimeout(() => {
+      window.location.replace("https://www.instagram.com/?variant=following");
+    }, 300);
+  }
+</script>
 
   <style>
     body {
